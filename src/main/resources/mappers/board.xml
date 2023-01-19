@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="cg.park.board_sample.api.board.dao.BoardDao">
+
+    <select id="boards" parameterType="Board" resultType="Board">
+        SELECT
+              board_no
+            , title
+            , detail
+            , created_date
+            , created_by
+            , updated_date
+            , updated_by
+        FROM BOARD
+    </select>
+
+    <insert id="save" parameterType="Board">
+        <selectKey keyColumn="boardNo" resultType="Integer">
+            SELECT NVL(MAX(board_no), 0)+1 FROM BOARD
+        </selectKey>
+
+        INSERT INTO BOARD (
+               board_no
+              , title
+              , detail
+              , created_date
+              , created_by
+              , updated_date
+              , updated_by
+        ) VALUES (
+                #{boardNo}
+              , #{title}
+              , #{detail}
+              , NOW()
+              , 'admin'
+              , NOW()
+              , 'admin'
+        )
+    </insert>
+
+</mapper>

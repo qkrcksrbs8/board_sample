@@ -1,0 +1,10 @@
+-- 게시글
+CREATE TABLE BOARD(
+      board_no int not null auto_increment primary key,
+      title varchar(255),
+      detail varchar(2000),
+      created_date date default now(),
+      created_by varchar(25),
+      updated_date date,
+      updated_by varchar(25)
+) DEFAULT CHARSET=utf8;
