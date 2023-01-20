@@ -2,13 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
 <c:import url="/head"/>
-</head>
 <c:import url="/header"/>
-<body>
 
-<!-- 자유게시판 write wrap -->
+<body>
 <section id="content" class="board-write-con-wrap">
     <div class="container">
         <div class="form-widget">

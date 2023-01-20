@@ -8,11 +8,21 @@ import cg.park.board_sample.comm.util.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BoardService {
 
     @Autowired
     BoardDao boardDao;
+
+    public int countBy(Board board) {
+        return boardDao.countBy(board);
+    }
+
+    public List<Board> findAll(Board board) {
+        return boardDao.findAll(board);
+    }
 
     public Message save(Board board) {
         Message check = saveCheck(board);
@@ -38,5 +48,9 @@ public class BoardService {
 
         boardDao.save(board);
         return new Message(true);
+    }
+
+    public Board findByBoardNo(Integer boardNo) {
+        return boardDao.findByBoardNo(boardNo);
     }
 }

@@ -2,10 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
-    <c:import url="/head"/>
-</head>
-
+<c:import url="/head"/>
 <c:import url="/header"/>
 
 <!-- OurTeam start -->

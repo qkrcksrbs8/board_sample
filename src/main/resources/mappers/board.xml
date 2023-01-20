@@ -3,7 +3,12 @@
 
 <mapper namespace="cg.park.board_sample.api.board.dao.BoardDao">
 
-    <select id="boards" parameterType="Board" resultType="Board">
+    <select id="countBy" parameterType="Board" resultType="int">
+        SELECT count(*)
+        FROM BOARD
+    </select>
+
+    <select id="findAll" parameterType="Board" resultType="Board">
         SELECT
               board_no
             , title
@@ -13,6 +18,19 @@
             , updated_date
             , updated_by
         FROM BOARD
+    </select>
+
+    <select id="findByBoardNo" parameterType="int" resultType="Board">
+        SELECT
+            board_no
+             , title
+             , detail
+             , created_date
+             , created_by
+             , updated_date
+             , updated_by
+        FROM BOARD
+        WHERE board_no = #{boardNo}
     </select>
 
     <insert id="save" parameterType="Board">
