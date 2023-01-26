@@ -7,7 +7,7 @@ public class Message {
 
     private boolean isSucceed;
     private String message;
-    private Param param;	//파라미터 처리시에 사용.
+    private Param param;
 
     public Message(boolean isSucceed) {
         this.isSucceed = isSucceed;
