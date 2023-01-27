@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/board")
 @Controller
 public class BoardController {
+//2023-01-27 releases
 
     @Autowired
     BoardService boardService;
