@@ -10,21 +10,21 @@
     <div class="container">
         <div class="form-widget">
             <div class="form-result"></div>
-            <form class="nobottommargin" id="template-contactform" name="writeform" action="/write" method="post" onsubmit="return save()">
+            <form class="nobottommargin" id="template-contactform" name="writeform" action="/write" method="post" onsubmit="return save('${boardNo}')">
 
                 <div class="form-process"></div>
                 <input type="hidden" name="boardNo" value="">
 
                 <div class="col_full">
                     <label for="title">제목 <small>*</small></label>
-                    <input type="text" id="title" name="title" value="" class="required sm-form-control" />
+                    <input type="text" id="title" name="title" value="${board.title}" class="required sm-form-control" />
                 </div>
 
                 <div class="clear"></div>
 
                 <div class="col_full">
                     <label for="detail">내용 <small>*</small></label>
-                    <textarea class="required sm-form-control" id="detail" name="detail" rows="6" cols="30"></textarea>
+                    <textarea class="required sm-form-control" id="detail" name="detail" rows="6" cols="30">${board.detail}</textarea>
                 </div>
 
                 <div class="col_full hidden">
@@ -36,7 +36,12 @@
                         <a href="/board"><button class="btn btn-success">목록으로</button></a>
                     </div>
                     <div class="col-6 col-sm-6 text-right">
+                    <c:if test="${not empty boardNo}">
+                        <button id="update" class="btn btn-success" type="submit" >글수정</button>
+                    </c:if>
+                    <c:if test="${not empty boardNo}">
                         <button id="sub" class="btn btn-success" type="submit" >글쓰기</button>
+                    </c:if>
                     </div>
                 </div>
             </form>
@@ -48,7 +53,7 @@
 
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
-    const save = () => {
+    const save = (boardNo) => {
         let title = $('#title').val();
         let detail = $('#detail').val();
 
@@ -68,9 +73,15 @@
             title, detail
         }
 
+        let url = '/board/write';
+
+        if ('' != boardNo) {
+            url = '/board/write/'+boardNo;
+        }
+
         $.ajax ({
             type : "POST",
-            url : '/board/write', //해당 ajax연결
+            url : url, //해당 ajax연결
             dataType : 'json',
             data : param,
             success : function(data) {

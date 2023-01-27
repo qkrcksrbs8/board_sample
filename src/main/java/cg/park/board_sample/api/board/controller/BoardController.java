@@ -2,16 +2,17 @@ package cg.park.board_sample.api.board.controller;
 
 import cg.park.board_sample.api.board.model.Board;
 import cg.park.board_sample.api.board.service.BoardService;
+import cg.park.board_sample.comm.util.HttpRequestHelper;
 import cg.park.board_sample.comm.util.Message;
+import cg.park.board_sample.comm.util.PagingUtil;
 import cg.park.board_sample.comm.util.ResponseMav;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RequestMapping("/board")
 @Controller
@@ -22,9 +23,18 @@ public class BoardController {
 
     @GetMapping("")
     public ResponseMav list(Board board) {
+        HttpServletRequest request = HttpRequestHelper.getCurrentRequest();
+
+        int count = boardService.countBy(board);
+        PagingUtil paging = new PagingUtil(request.getQueryString(), board.getPageNum(), count, board.getBlockCount(), board.getBlockPage(), request.getRequestURI());
+        board.setStartCount(paging.getStartCount());
+        board.setEndCount(paging.getEndCount());
+
         return new ResponseMav("board/board")
-                .set("count", boardService.countBy(board))
-                .set("list", boardService.findAll(board));
+                .set("count", count)
+                .set("list", boardService.findAll(board))
+                .set("board", board)
+                .set("paging", paging.getPagingHtml());
     }
 
     @GetMapping("/write")
@@ -37,10 +47,29 @@ public class BoardController {
         return new ResponseEntity<>(boardService.save(board), HttpStatus.OK);
     }
 
-    @GetMapping("/board/{boardNo}")
+    @GetMapping("/write/{boardNo}")
+    public ResponseMav update(@PathVariable("boardNo") Integer boardNo) {
+        return new ResponseMav("/board/write")
+                .set("board", boardService.findByBoardNo(boardNo))
+                .set("boardNo", boardNo);
+    }
+
+    // 업데이트 전체 바꿔야함
+    @PostMapping("/write/{boardNo}")
+    public ResponseEntity<Message> updateSave(@PathVariable("boardNo") Integer boardNo, Board board) {
+        return new ResponseEntity<>(boardService.update(board.boardNo(boardNo)), HttpStatus.OK);
+    }
+
+    @GetMapping("/{boardNo}")
     public ResponseMav detail(@PathVariable("boardNo") Integer boardNo) {
         return new ResponseMav("/board/detail")
-                .set("board", boardService.findByBoardNo(boardNo));
+                .set("board", boardService.findByBoardNo(boardNo))
+                .set("boardNo", boardNo);
+    }
+
+    @DeleteMapping("/{boardNo}")
+    public ResponseEntity<Message> delete(@PathVariable("boardNo") Integer boardNo) {
+        return new ResponseEntity<>(boardService.delete(boardNo) , HttpStatus.OK);
     }
 
 }

@@ -28,7 +28,7 @@
                     ${no}
                 </li>
                 <li class="col-6 col-md-6">
-                    ${row.title}
+                    <a href="/board/${row.boardNo}">${row.title}</a>
                 </li>
                 <li class="col-3 col-md-3">
                     ${row.createdBy}
@@ -69,6 +69,8 @@
     </div>
 </section>
 
+${paging}
+
 <!-- 자유게시판 list page search -->
 <section id="content" class="board-list-search-wrap">
     <div class="container">
@@ -83,18 +85,17 @@
                     <div class="form-row">
                         <div class="form-group  col-4 col-md-3 offset-md-4">
                             <div class="white-section">
-                                <select id="inputState" name="search" class="form-control selectpicker">
-                                    <option value="TP_title">제목</option>
-                                    <option value="subject_content">제목+본문</option>
-                                    <option value="subject_writer">작성자</option>
+                                <select id="searchStatus" name="search" class="form-control selectpicker">
+                                    <option value="title">제목</option>
+                                    <option value="detail">내용</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group col-5 col-md-4">
-                            <input type="text" class="form-control">
+                            <input type="text" id="searchText" class="form-control" value="${board.title}${board.detail}">
                         </div>
                         <div class="form-group col-3 col-md-1">
-                            <button type="submit" class="btn btn-success form-control"><i class="icon-line-search"></i></button>
+                            <button type="button" class="btn btn-success write-btn btn-block" onclick="board();"><i class="icon-line-search"></i></button>
                         </div>
                     </div>
                 </form>
@@ -104,9 +105,17 @@
 </section>
 
 </body>
+
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
     const write = () => {
         location.href = 'write';
+    }
+
+    const board = () => {
+        let searchStatus = $('#searchStatus').val();
+        let searchText = $('#searchText').val();
+        location.href = '/board?'+searchStatus+'='+searchText;
     }
 </script>
 </html>

@@ -3,9 +3,21 @@
 
 <mapper namespace="cg.park.board_sample.api.board.dao.BoardDao">
 
+    <sql id="condition">
+        <where>
+            <if test="title != null and title != ''">
+                title like CONCAT('%',#{title},'%')
+            </if>
+            <if test="detail != null and detail != ''">
+                detail like CONCAT('%',#{detail},'%')
+            </if>
+        </where>
+    </sql>
+
     <select id="countBy" parameterType="Board" resultType="int">
         SELECT count(*)
         FROM BOARD
+        <include refid="condition"></include>
     </select>
 
     <select id="findAll" parameterType="Board" resultType="Board">
@@ -18,6 +30,9 @@
             , updated_date
             , updated_by
         FROM BOARD
+        <include refid="condition"></include>
+        ORDER BY board_no DESC
+        LIMIT #{endCount} OFFSET #{startCount}
     </select>
 
     <select id="findByBoardNo" parameterType="int" resultType="Board">
@@ -56,5 +71,17 @@
               , 'admin'
         )
     </insert>
+
+    <update id="update" parameterType="Board">
+        UPDATE BOARD
+        SET   title = #{title}
+            , detail = #{detail}
+            , updated_date = NOW()
+        WHERE board_no = #{boardNo}
+    </update>
+
+    <delete id="delete" parameterType="Integer">
+        DELETE FROM BOARD WHERE board_no = #{boardNo}
+    </delete>
 
 </mapper>

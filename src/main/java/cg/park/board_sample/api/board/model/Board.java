@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class Board {
+public class Board extends Paging {
 
     private Integer boardNo;
     private String title;
@@ -14,5 +14,11 @@ public class Board {
     private String createdBy;
     private Date updatedDate;
     private String updatedBy;
+
+    Board(){}
+    public Board boardNo(Integer boardNo){
+        this.boardNo = boardNo;
+        return this;
+    }
 
 }
