@@ -18,14 +18,30 @@
                     <li><a href="/board"><div><i class="icon-clipboard-list"></i>자유게시판</div></a></li>
                 </ul>
                 <ul>
-                    <c:if test="${empty memberId}">
+                    <c:if test="${empty member.memberId}">
                     <li><a href="/auth/login"><div><i class="icon-power-off"></i>로그인</div></a></li>
                     </c:if>
-                    <c:if test="${not empty memberId}">
-                        <li><a href="/auth/logout"><div><i class="icon-power-off"></i>로그아웃</div></a></li>
+                    <c:if test="${not empty member.memberId}">
+                        <li><a href="/" onclick="logout();"><div><i class="icon-power-off"></i>로그아웃</div></a></li>
                     </c:if>
                 </ul>
             </nav><!-- #primary-menu end -->
         </div>
     </div>
 </header><!-- #header end -->
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+    const logout = () => {
+        $.ajax ({
+            type  : 'DELETE',
+            url : '/auth/login' ,
+            dataType : 'json',
+            error : function() {
+                alert('잠시 후 다시 시도해주세요.');
+                location.href = '/';
+                return false;
+            }
+        });
+    }
+
+</script>

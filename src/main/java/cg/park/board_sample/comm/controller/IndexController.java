@@ -1,5 +1,8 @@
 package cg.park.board_sample.comm.controller;
 
+import cg.park.board_sample.comm.util.MemberSession;
+import cg.park.board_sample.comm.util.ResponseMav;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -26,7 +29,9 @@ public class IndexController {
     }
 
     @GetMapping("/header")
-    public String header() {
-        return "/include/header";
+    public ResponseMav header() {
+        return new ResponseMav("/include/header")
+                .set("member", MemberSession.getCurrentInstance().getMember());
     }
+
 }

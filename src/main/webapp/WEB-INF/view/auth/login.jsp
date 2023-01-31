@@ -63,7 +63,6 @@
                     alert(data.message);
                     return false;
                 }
-                alert(data.message);
                 location.href = '/';
                 return false;
             }

@@ -1,7 +1,5 @@
 package cg.park.board_sample.comm.util;
 
-import org.springframework.util.StringUtils;
-
 public final class BoardUtil {
 
     public static boolean isBlank(final CharSequence cs) {
@@ -12,10 +10,9 @@ public final class BoardUtil {
         if (strLen == 0)
             return true;
 
-        for (int i = 0; i < strLen; i++) {
+        for (int i = 0; i < strLen; i++)
             if (!Character.isWhitespace(cs.charAt(i)))
                 return false;
-        }
 
         return true;
     }
