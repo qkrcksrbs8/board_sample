@@ -34,4 +34,9 @@ public class AuthController {
         return new ResponseMav("redirect:/");
     }
 
+    @GetMapping("/logon")
+    public ResponseMav logon() {
+        return new ResponseMav("auth/logon");
+    }
+
 }

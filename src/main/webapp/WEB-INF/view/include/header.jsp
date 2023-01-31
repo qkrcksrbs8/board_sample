@@ -20,6 +20,7 @@
                 <ul>
                     <c:if test="${empty member.memberId}">
                     <li><a href="/auth/login"><div><i class="icon-power-off"></i>로그인</div></a></li>
+                        <li><a href="/auth/logon"><div><i class="icon-line-circle-plus"></i>회원가입</div></a></li>
                     </c:if>
                     <c:if test="${not empty member.memberId}">
                         <li><a href="/" onclick="logout();"><div><i class="icon-power-off"></i>로그아웃</div></a></li>
