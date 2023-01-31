@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header id="header" class="split-menu">
     <div id="header-wrap">
         <div class="container clearfix">
@@ -17,7 +18,12 @@
                     <li><a href="/board"><div><i class="icon-clipboard-list"></i>자유게시판</div></a></li>
                 </ul>
                 <ul>
-
+                    <c:if test="${empty memberId}">
+                    <li><a href="/auth/login"><div><i class="icon-power-off"></i>로그인</div></a></li>
+                    </c:if>
+                    <c:if test="${not empty memberId}">
+                        <li><a href="/auth/logout"><div><i class="icon-power-off"></i>로그아웃</div></a></li>
+                    </c:if>
                 </ul>
             </nav><!-- #primary-menu end -->
         </div>
