@@ -24,7 +24,7 @@
                             <div class="col_full">
                                 <label>비밀번호:</label>
                                 <input type="password" id="password" name="password" class="form-control not-dark" required/>
-                                <label style="color:red;"><b>아이디 또는 비밀번호가 틀렸습니다.</b></label>
+                                <label style="color:red; display: block"><b>아이디 또는 비밀번호가 틀렸습니다.</b></label>
                             </div>
                             <div class="col_full nobottommargin">
                                 <button class="button button-black nomargin" value="login" onclick="login();">로그인</button>
@@ -59,11 +59,12 @@
             dataType : 'json',
             data : param,
             success : function(data) {
-                if (!data.status) {
-                    alert(data.message);
+                if ('200' == data.message) {
+                    location.href = '/';
                     return false;
                 }
-                location.href = '/';
+                alert('아이디 및 비밀번호를 확인해주세요.');
+                location.href = '/auth/login';
                 return false;
             }
             ,fail : function(data) {

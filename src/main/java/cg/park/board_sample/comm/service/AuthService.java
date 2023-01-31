@@ -28,7 +28,7 @@ public class AuthService {
 
         MemberSession.getCurrentInstance().login(member);
 
-        return new Message(true);
+        return new Message(true, "200");
     }
 
     public boolean isLoginParamFail(Member member) {
