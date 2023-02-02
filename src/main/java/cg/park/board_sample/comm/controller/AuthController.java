@@ -24,7 +24,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Message> sessLogin(Member member) {
+    public ResponseEntity<Message> login(Member member) {
         return new ResponseEntity<>(authService.login(member), HttpStatus.OK);
     }
 

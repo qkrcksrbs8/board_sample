@@ -27,7 +27,16 @@ public class BoardController {
         HttpServletRequest request = HttpRequestHelper.getCurrentRequest();
 
         int count = boardService.countBy(board);
-        PagingUtil paging = new PagingUtil(request.getQueryString(), board.getPageNum(), count, board.getBlockCount(), board.getBlockPage(), request.getRequestURI());
+        PagingUtil paging = new PagingUtil
+                            .Builder()
+                            .setQueryString(request.getQueryString())
+                            .setCurrentPage(board.getPageNum())
+                            .setTotalCount(count)
+                            .setBlockCount(board.getBlockCount())
+                            .setBlockPage(board.getBlockPage())
+                            .setPageUrl(request.getRequestURI())
+                            .build();
+
         board.setStartCount(paging.getStartCount());
         board.setEndCount(paging.getEndCount());
 
@@ -44,7 +53,7 @@ public class BoardController {
     }
 
     @PostMapping("/write")
-    public ResponseEntity<Message> writeSave(Board board) {
+    public ResponseEntity<Message> write(Board board) {
         return new ResponseEntity<>(boardService.save(board), HttpStatus.OK);
     }
 
@@ -55,9 +64,8 @@ public class BoardController {
                 .set("boardNo", boardNo);
     }
 
-    // 업데이트 전체 바꿔야함
     @PostMapping("/write/{boardNo}")
-    public ResponseEntity<Message> updateSave(@PathVariable("boardNo") Integer boardNo, Board board) {
+    public ResponseEntity<Message> update(@PathVariable("boardNo") Integer boardNo, Board board) {
         return new ResponseEntity<>(boardService.update(board.boardNo(boardNo)), HttpStatus.OK);
     }
 
