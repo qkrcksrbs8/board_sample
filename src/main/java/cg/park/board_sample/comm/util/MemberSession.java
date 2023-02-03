@@ -17,7 +17,6 @@ public class MemberSession {
 
     public MemberSession() {
         this.request = HttpRequestHelper.getCurrentRequest();
-
         this.session = request.getSession();
 
         if(session.getAttribute(MemberSession.MEMBER_SESSION_NAME) != null)
@@ -32,7 +31,6 @@ public class MemberSession {
      */
     public MemberSession(HttpServletRequest request) {
         this.request = request;
-
         this.session = request.getSession();
 
         if(session.getAttribute(MemberSession.MEMBER_SESSION_NAME) != null)
@@ -73,21 +71,15 @@ public class MemberSession {
     }
 
     public Member getMember() {
-        return (!isLogin())
-                ? null
-                : member;
+        return (!isLogin()) ? null : member;
     }
 
     public String getMemberId() {
-        return (!isLogin())
-                ? empty
-                : member.getMemberId();
+        return (!isLogin()) ? empty : member.getMemberId();
     }
 
     public String getName() {
-        return (!isLogin())
-                ? empty
-                : member.getName();
+        return (!isLogin()) ? empty : member.getName();
     }
 
     public void setMemberSession(Member admin) {

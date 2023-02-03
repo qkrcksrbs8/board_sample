@@ -66,9 +66,9 @@
               , #{title}
               , #{detail}
               , NOW()
-              , 'admin'
+              , #{createdBy}
               , NOW()
-              , 'admin'
+              , #{createdBy}
         )
     </insert>
 

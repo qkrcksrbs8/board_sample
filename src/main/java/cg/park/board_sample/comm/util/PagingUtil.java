@@ -1,6 +1,8 @@
 
 package cg.park.board_sample.comm.util;
 
+import cg.park.board_sample.api.board.model.Paging;
+
 public class PagingUtil {
 	
 	private int startCount;
@@ -117,6 +119,53 @@ public class PagingUtil {
 		return (queryString==null)
 				? "&nbsp;<a href='"+pageUrl+"?pageNum="
 				: "&nbsp;<a href='"+pageUrl+"?"+queryString+"&pageNum=";
+	}
+
+	public PagingUtil(Builder b) {
+		this(b.queryString, b.currentPage, b.totalCount, b.blockCount, b.blockPage, b.pageUrl);
+	}
+
+	public static class Builder {
+		private String queryString;
+		int currentPage;
+		int totalCount;
+		int blockCount;
+		int blockPage;
+		String pageUrl;
+
+		public Builder setQueryString(String queryString) {
+			this.queryString = queryString;
+			return this;
+		}
+
+		public Builder setCurrentPage(int currentPage) {
+			this.currentPage = currentPage;
+			return this;
+		}
+
+		public Builder setTotalCount(int totalCount) {
+			this.totalCount = totalCount;
+			return this;
+		}
+
+		public Builder setBlockCount(int blockCount) {
+			this.blockCount = blockCount;
+			return this;
+		}
+
+		public Builder setBlockPage(int blockPage) {
+			this.blockPage = blockPage;
+			return this;
+		}
+
+		public Builder setPageUrl(String pageUrl) {
+			this.pageUrl = pageUrl;
+			return this;
+		}
+
+		public PagingUtil build() {
+			return new PagingUtil(this);
+		}
 	}
 
 }

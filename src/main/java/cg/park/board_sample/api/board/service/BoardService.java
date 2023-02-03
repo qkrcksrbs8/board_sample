@@ -3,6 +3,7 @@ package cg.park.board_sample.api.board.service;
 import cg.park.board_sample.api.board.dao.BoardDao;
 import cg.park.board_sample.api.board.model.Board;
 import cg.park.board_sample.comm.util.BoardUtil;
+import cg.park.board_sample.comm.util.MemberSession;
 import cg.park.board_sample.comm.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,9 @@ public class BoardService {
         Message check = saveCheck(board);
         if (!check.getStatus())
             return check;
+
+        if (null != MemberSession.getCurrentInstance().getMember())
+            board.setCreatedBy(MemberSession.getCurrentInstance().getMember().getMemberId());
 
         return save(board, true);
     }
@@ -68,6 +72,9 @@ public class BoardService {
         Message check = saveCheck(board);
         if (!check.getStatus())
             return check;
+
+        if (null != MemberSession.getCurrentInstance().getMember())
+            board.setCreatedBy(MemberSession.getCurrentInstance().getMember().getMemberId());
 
         return update(board, true);
     }

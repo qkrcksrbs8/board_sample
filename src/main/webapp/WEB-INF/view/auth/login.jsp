@@ -24,7 +24,6 @@
                             <div class="col_full">
                                 <label>비밀번호:</label>
                                 <input type="password" id="password" name="password" class="form-control not-dark" required/>
-                                <label style="color:red; display: block"><b>아이디 또는 비밀번호가 틀렸습니다.</b></label>
                             </div>
                             <div class="col_full nobottommargin">
                                 <button class="button button-black nomargin" value="login" onclick="login();">로그인</button>
@@ -69,6 +68,7 @@
             }
             ,fail : function(data) {
                 alert(data.message);
+                location.href = '/auth/login';
                 return false;
             }
             ,error : function() {

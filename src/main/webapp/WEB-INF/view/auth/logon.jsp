@@ -18,19 +18,19 @@
                     <form id="register-form" name="register-form" class="nobottommargin" action="/TDLSpring/register.do" method="post">
 
                         <div class="col_full">
-                            <label >아이디:</label>
+                            <label>아이디:</label>
                             <input type="text" class="form-control" required/>
-                            <input type="button" class="button button-3d button-green"  onclick="duplicateId();" value="중복체크">
+                            <input type="button" class="button button-3d button-green" value="중복체크" onclick="duplicateId();">
                         </div>
 
                         <div class="col_full">
                             <label>패스워드:</label>
-                            <input type="password" value="" class="form-control" required/>
+                            <input type="password" class="form-control" value="" required/>
                         </div>
 
                         <div class="col_full">
                             <label>패스워드 확인:</label>
-                            <input type="password" value="" class="form-control" required/>
+                            <input type="password" class="form-control" value="" required/>
                         </div>
 
                         <div class="col_full">
