@@ -18,39 +18,21 @@ public class ControllerLogAop {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    //    @Around("execution(* cg.park.springlotto..controllers.*.*(..)) || execution(* cg.park.springlotto..services.*.*(..))")
-    @Around("execution(* cg.park.board_sample..controller.*.*(..))")
-    public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
-        String type = joinPoint.getSignature().toShortString();
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        logger.info("SSID = {}, ===================START===================", BoardUtil.requestedSessionId());
-        logger.info("SSID = {}, @Around : {}, param : {} ", BoardUtil.requestedSessionId(), type, BoardUtil.mapToStr(request.getParameterMap()));
-        return joinPoint.proceed();
-    }
-
-    //    @Before("execution(* cg.park.springlotto..controllers.*.*(..)) || execution(* cg.park.springlotto..services.*.*(..))")
-    @Before("execution(* cg.park.board_sample..controller.*.*(..))")
+    @Before("execution(* cg.park.board_sample.api..controller.*.*(..))")
     public void before(JoinPoint joinPoint) {
-        String type = joinPoint.getSignature().toShortString();
-        Object[] args = joinPoint.getArgs();
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        if (args.length == 0 || args[0] instanceof HttpServletRequest){
-            logger.info("SSID = {}, @Before : {}, param : {}", BoardUtil.requestedSessionId(), type, BoardUtil.mapToStr(request.getParameterMap()));
-        }else{
-            logger.info("SSID = {}, @Before : {}, param : {}", BoardUtil.requestedSessionId(), type, BoardUtil.setParamParse(args[0].toString(), "="));
-        }
+        String param = BoardUtil.mapToStr(request.getParameterMap());
+        logger.info("SSID = {}, ===================START===================", BoardUtil.requestedSessionId());
+        logger.info("SSID = {}, @Before : {}, Method : {}, URI : {}, param : {}", BoardUtil.requestedSessionId(), BoardUtil.currentType(joinPoint), request.getMethod(), request.getRequestURI(), param);
     }
 
-    //    @AfterReturning(pointcut = "execution(* cg.park.springlotto..controllers.*.*(..)) || execution(* cg.park.springlotto..services.*.*(..))", returning="retValue")
-    @AfterReturning(pointcut = "execution(* cg.park.board_sample..controller.*.*(..))", returning="retValue")
+    @AfterReturning(pointcut = "execution(* cg.park.board_sample.api..controller.*.*(..))", returning="retValue")
     public void after(JoinPoint joinPoint, Object retValue) {
-        String type = joinPoint.getSignature().toShortString();
-        logger.info("SSID = {}, @After : {}, result : {}", BoardUtil.requestedSessionId(), type, retValue);
+        logger.info("SSID = {}, @After : {}, result : {}", BoardUtil.requestedSessionId(), BoardUtil.currentType(joinPoint), retValue);
         logger.info("SSID = {}, ===================E N D===================", BoardUtil.requestedSessionId());
     }
 
-    //    @AfterThrowing(pointcut = "execution(* cg.park.springlotto..controllers.*.*(..)) || execution(* cg.park.springlotto..services.*.*(..))", throwing = "ex")
-    @AfterThrowing(pointcut = "execution(* cg.park.board_sample..controller.*.*(..))", throwing = "ex")
+    @AfterThrowing(pointcut = "execution(* cg.park.board_sample.api..controller.*.*(..))", throwing = "ex")
     public void afterThrowingAnException(JoinPoint joinPoint, Exception ex) {
         logger.info("SSID = {}", BoardUtil.requestedSessionId());
         logger.info("SSID = {}, ===================E N D===================", BoardUtil.requestedSessionId());

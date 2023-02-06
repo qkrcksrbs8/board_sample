@@ -1,5 +1,7 @@
 package cg.park.board_sample.comm.util;
 
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -109,4 +111,11 @@ public final class BoardUtil {
         return null;
     }
 
+    public static String currentType(ProceedingJoinPoint joinPoint) {
+        return joinPoint.getSignature().toShortString();
+    }
+
+    public static String currentType(JoinPoint joinPoint) {
+        return joinPoint.getSignature().toShortString();
+    }
 }

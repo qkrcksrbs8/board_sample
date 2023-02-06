@@ -15,7 +15,6 @@ public class IndexController {
 
     @GetMapping("/")
     public String defaultPage() {
-        log.info("index!!!!!!!!");
         return returnIndex();
     }
 
