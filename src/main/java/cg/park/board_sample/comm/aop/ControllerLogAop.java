@@ -2,7 +2,6 @@ package cg.park.board_sample.comm.aop;
 
 import cg.park.board_sample.comm.util.BoardUtil;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 @Aspect
 public class ControllerLogAop {
 
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+    Logger logger = LoggerFactory.getLogger(super.getClass());
 
     @Before("execution(* cg.park.board_sample.api..controller.*.*(..))")
     public void before(JoinPoint joinPoint) {
