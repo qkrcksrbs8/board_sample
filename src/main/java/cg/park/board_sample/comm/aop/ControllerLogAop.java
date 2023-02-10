@@ -21,8 +21,9 @@ public class ControllerLogAop {
     public void before(JoinPoint joinPoint) {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
         String param = BoardUtil.mapToStr(request.getParameterMap());
+        String uri = request.getMethod() + "["+request.getRequestURI()+"]";
         logger.info("SSID = {}, ===================START===================", BoardUtil.requestedSessionId());
-        logger.info("SSID = {}, @Before : {}, Method : {}, URI : {}, param : {}", BoardUtil.requestedSessionId(), BoardUtil.currentType(joinPoint), request.getMethod(), request.getRequestURI(), param);
+        logger.info("SSID = {}, @Before : {}, {}, param : {}", BoardUtil.requestedSessionId(), BoardUtil.currentType(joinPoint), uri, param);
     }
 
     @AfterReturning(pointcut = "execution(* cg.park.board_sample.api..controller.*.*(..))", returning="retValue")
