@@ -25,8 +25,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<Message> login(Member member) {
-        // FOUND 307
-        return new ResponseEntity<>(authService.login(member), HttpStatus.FOUND);
+        return new ResponseEntity<>(authService.login(member), HttpStatus.OK);
     }
 
     @DeleteMapping("/login")
