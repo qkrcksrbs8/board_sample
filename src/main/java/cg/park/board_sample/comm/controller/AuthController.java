@@ -21,6 +21,7 @@ public class AuthController {
     @GetMapping("/login")
     public ResponseMav login() {
         return new ResponseMav("auth/login");
+//        return new ResponseMav("auth/login", 302);
     }
 
     @PostMapping("/login")
