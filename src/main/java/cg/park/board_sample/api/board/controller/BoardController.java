@@ -71,7 +71,6 @@ public class BoardController {
 
     @GetMapping("/{boardNo}")
     public ResponseMav detail(@PathVariable("boardNo") Integer boardNo) {
-        // boardNo seq
         return new ResponseMav("/board/detail")
                 .set("board", boardService.findByBoardNo(boardNo))
                 .set("boardNo", boardNo);
