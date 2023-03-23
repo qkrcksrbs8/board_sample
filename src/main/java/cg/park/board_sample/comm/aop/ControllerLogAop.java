@@ -2,16 +2,14 @@ package cg.park.board_sample.comm.aop;
 
 import cg.park.board_sample.comm.util.BoardUtil;
 import cg.park.board_sample.comm.util.HttpRequestHelper;
+import cg.park.board_sample.comm.util.HwaniBearEventUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Component
 @Aspect
@@ -28,10 +26,7 @@ public class ControllerLogAop {
         String param = BoardUtil.mapToStr(request.getParameterMap());
         String uri = request.getMethod() + "["+request.getRequestURI()+"]";
 
-        HttpSession session = request.getSession();
-        String lastUri = session.getAttribute("LAST_URI") == null ? "" : session.getAttribute("LAST_URI").toString();
-        session.setAttribute("DUPLE_URI_YN", (lastUri.equals(request.getRequestURI()))? "Y" : "N");
-        session.setAttribute("LAST_URI", request.getRequestURI());
+        HwaniBearEventUtil.init(request.getRequestURI());
 
         logger.info("SSID = {}, ===================START===================", BoardUtil.requestedSessionId());
         logger.info("SSID = {}, @Before : {}, {}, param : {}", BoardUtil.requestedSessionId(), BoardUtil.currentType(joinPoint), uri, param);
