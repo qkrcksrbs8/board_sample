@@ -7,7 +7,11 @@ import java.util.HashMap;
 @Component
 public class Param extends HashMap {
 
-    Param () {}
+    public Param () {}
+
+    public Param (Object obj) {
+        super.put("data", obj);
+    }
     Param (String key, String value) {
         super.put(key, value);
     }
