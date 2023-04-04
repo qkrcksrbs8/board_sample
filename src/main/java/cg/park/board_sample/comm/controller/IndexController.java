@@ -1,5 +1,6 @@
 package cg.park.board_sample.comm.controller;
 
+import cg.park.board_sample.comm.util.HttpRequestHelper;
 import cg.park.board_sample.comm.util.MemberSession;
 import cg.park.board_sample.comm.util.ResponseMav;
 
@@ -31,7 +32,9 @@ public class IndexController {
     @GetMapping("/header")
     public ResponseMav header() {
         return new ResponseMav("/include/header")
-                .set("member", MemberSession.getCurrentInstance().getMember());
+                .set("member", MemberSession.getCurrentInstance().getMember())
+                .set("isHwaniBear", HttpRequestHelper.getCurrentSession().getAttribute("IS_HWANI_BEAR"))
+                .set("hwaniBearCode", HttpRequestHelper.getCurrentSession().getAttribute("HWANI_BEAR_CODE"));
     }
 
 }
