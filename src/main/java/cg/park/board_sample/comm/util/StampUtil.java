@@ -35,17 +35,17 @@ public class StampUtil {
         }
         session().setAttribute("LAST_PATH", uri);
 
-        StringBuffer hwaniBearCde = new StringBuffer();
+        StringBuffer hwaniBearCode = new StringBuffer();
 
         // 화니베어 코드 돌리기
         boolean isHwaniBear = probability > new Random().nextInt(100);
 
         // 화니베어 노출 확정 시 화니베어 코드 추출
         if (isHwaniBear)
-            hwaniBearCde.append("STAMP00"+new Random().nextInt(6));
+            hwaniBearCode.append("STAMP00"+new Random().nextInt(6));
 
         session().setAttribute("IS_STAMP", isHwaniBear ? "Y" : "N");
-        session().setAttribute("STAMP_CODE", hwaniBearCde.toString());
+        session().setAttribute("STAMP_CODE", hwaniBearCode.toString());
     }
 
     public static void destroy() {
@@ -56,20 +56,18 @@ public class StampUtil {
     }
 
     public static boolean isBlock(String uri) {
-        if (-1 < uri.indexOf("/index") && -1 == uri.indexOf("/other/")) return true;
-        if (-1 < uri.indexOf("/introduce/")) return true;
-        if (-1 < uri.indexOf("/media/")) return true;
-        if (-1 < uri.indexOf("/share/promotion/list")) return true;
-        if (-1 < uri.indexOf("/share/promotion/view")) return true;
-        if (-1 < uri.indexOf("/enjoy/")) return true;
-        if (-1 < uri.indexOf("/buy/")) return true;
+        if (uri.contains("/index") && !uri.contains("/other/")) return true;
+        if (uri.contains("/introduce/")) return true;
+        if (uri.contains("/media/")) return true;
+        if (uri.contains("/share/promotion/list")) return true;
+        if (uri.contains("/share/promotion/view")) return true;
+        if (uri.contains("/enjoy/")) return true;
+        if (uri.contains("/buy/")) return true;
         return false;
     }
 
     public static boolean isNone(String uri) {
-        if (-1 < uri.indexOf("/other/")) return true;
-        if (-1 < uri.indexOf("/include/")) return true;
-        return false;
+        return (uri.contains("/other/") || uri.contains("/include/")) ? true : false;
     }
 
     public static String currentStampStatus() {
@@ -82,5 +80,25 @@ public class StampUtil {
         return (null == session().getAttribute("STAMP_CODE"))
                 ? ""
                 : session().getAttribute("STAMP_CODE").toString();
+    }
+
+    public static void preStamp() {
+        String uri = uri();
+
+//        if (StringUtils.isBlank(uri))
+//            return;
+        if (null == uri || "".equals(uri.trim()))
+            return;
+
+
+        if (isBlock(uri)) {
+            init(uri, 30);
+            return;
+        }
+
+        if (isNone(uri)) {
+            destroy();
+            return;
+        }
     }
 }
