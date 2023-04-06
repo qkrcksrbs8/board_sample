@@ -19,4 +19,9 @@ public class Param extends HashMap {
         super.put(key, value);
         return this;
     }
+
+    public Param set(String key, int value) {
+        super.put(key, value);
+        return this;
+    }
 }
