@@ -2,6 +2,7 @@ package cg.park.board_sample.comm.aop;
 
 import cg.park.board_sample.comm.util.BoardUtil;
 import cg.park.board_sample.comm.util.HttpRequestHelper;
+import cg.park.board_sample.comm.util.StampUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -25,22 +26,7 @@ public class ControllerLogAop {
         String param = BoardUtil.mapToStr(request.getParameterMap());
         String uri = request.getMethod() + "["+request.getRequestURI()+"]";
 
-        // refresh check
-//        String uri = StampUtil.uri();
-//
-//        if (StringUtils.isBlank(uri))
-//            return;
-//
-//        if (StampUtil.isBlock(uri)) {
-//            StampUtil.init(uri, 30);
-//            return;
-//        }
-//
-//        if (StampUtil.isNone(uri)) {
-//            StampUtil.destroy();
-//            return;
-//        }
-
+        StampUtil.preStamp();
 
         logger.info("SSID = {}, ===================START===================", BoardUtil.requestedSessionId());
         logger.info("SSID = {}, @Before : {}, {}, param : {}", BoardUtil.requestedSessionId(), BoardUtil.currentType(joinPoint), uri, param);
