@@ -26,7 +26,7 @@ public class StampUtil {
         return lastUri().equals(url);
     }
 
-    public static void init(String uri, int probability) {
+    public static void build(String uri, int probability) {
         boolean duple = isDuple(uri);
         session().setAttribute("DUPLE_URI_YN", duple ? "Y" : "N");
         if (duple) {
@@ -82,7 +82,7 @@ public class StampUtil {
                 : session().getAttribute("STAMP_CODE").toString();
     }
 
-    public static void preStamp() {
+    public static void init() {
         String uri = uri();
 
 //        if (StringUtils.isBlank(uri))
@@ -90,9 +90,8 @@ public class StampUtil {
         if (null == uri || "".equals(uri.trim()))
             return;
 
-
         if (isBlock(uri)) {
-            init(uri, 30);
+            build(uri, 30);
             return;
         }
 
