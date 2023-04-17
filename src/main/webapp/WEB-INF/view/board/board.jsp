@@ -25,6 +25,26 @@
         margin-top: 40px;
         margin-bottom: 30px;
     }
+
+
+    #pop2{
+        width: 500px;
+        height: 170px;
+        background: #ffffff;
+        position: absolute;
+        top:30%;
+        left:35%;
+        border: 1px solid #000000;
+        text-align: center;
+    }
+    #excelUpload2{
+        position: absolute; width: 30px; height: 30px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0;
+    }
+    #fileButton2 { display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; }
+    #filebox2 {
+        margin-top: 40px;
+        margin-bottom: 30px;
+    }
 </style>
 <body>
 <section id="content">
@@ -98,6 +118,7 @@ ${paging}
                 <div class="col-4 col-md-12">
                     <button class="btn btn-success write-btn btn-block" onclick="location.href='/board/write'; return false;">글쓰기</button>
                     <button class="btn btn-success write-btn btn-block" onclick="excelPop();">엑셀 업로드</button>
+                    <button class="btn btn-success write-btn btn-block" onclick="excelPop2();">동영상 업로드</button>
                 </div>
             </div>
             <div class="col-12 col-md-10  nopadding">
@@ -139,6 +160,19 @@ ${paging}
     </form>
 </div>
 
+<div id="pop2" style="display: none">
+    <form id="fileUploadForm2">
+        <div id="filebox2">
+            <input type="text" class="txt" style="width:200px" id="fileName2" value=""/>
+            <label id="fileButton2" for="excelUpload2">찾아보기</label>
+            <input type="file" id="excelUpload2" name="excelUpload2" class="btnType1" onchange="uploadExcel2();" value="동영상 업로드">
+        </div>
+        <div>
+            <input type="button" class="btnType1" value="확인" onclick="videoUpload()">
+            <input type="button" class="btnType1" value="취소" onclick="excelCancel2()">
+        </div>
+    </form>
+</div>
 </body>
 
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -200,6 +234,86 @@ ${paging}
 
     const excelUpload = () => {
         alert('업로드!!');
+    }
+
+    const excelCancel2 = () => {
+        $("#pop2").css("display", "none")
+        $('#fileName2').val('');
+    }
+
+    const excelPop2 = () => {
+        $("#pop2").css("display", "block")
+    }
+
+    const uploadExcel2 = () => {
+        $("#fileUploadForm2").attr("target", "");
+        $("#fileUploadForm2").attr("action", "/video/extension/upload");
+
+        let form = $("#fileUploadForm2");
+        let data = new FormData(form[0]);
+
+        $.ajax ({
+            type : "POST",
+            // enctype : "multipart/form-data",
+            url : "/video/extension/excelUpload2",
+            data : data,
+            processData : false,
+            contentType : false,
+            cache : false,
+            timeout : 60000,
+            success : function(data) {
+                if (!data.status) {
+                    alert(data.message);
+                    location.href = '/board';
+                    return false;
+                }
+                $('#fileName2').val(data.param.data);
+                return false;
+            }
+            ,fail : function(data) {
+                alert(data.message);
+                return false;
+            }
+            ,error : function() {
+                alert('저장 중 오류가 발생했습니다.');
+                return false;
+            }
+        });
+    }
+
+    function videoUpload() {
+
+        let form = $("#fileUploadForm2");
+        let data = new FormData(form[0]);
+
+        $.ajax ({
+            type : "POST",
+            // enctype : "multipart/form-data",
+            url : "/video/save/excelUpload2",
+            data : data,
+            processData : false,
+            contentType : false,
+            cache : false,
+            timeout : 60000,
+            success : function(data) {
+                if (!data.status) {
+                    alert(data.message);
+                    location.href = '/';
+                    return false;
+                }
+                alert(data.message);
+                location.href = '/board';
+                return false;
+            }
+            ,fail : function(data) {
+                alert(data.message);
+                return false;
+            }
+            ,error : function() {
+                alert('저장 중 오류가 발생했습니다.');
+                return false;
+            }
+        });
     }
 
 </script>
