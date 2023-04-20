@@ -37,8 +37,9 @@ public class VideoService {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
             String formatedNow = now.format(formatter);
 
+            String physicalPath = "D:\\pcg\\DES\\sou\\SM\\data\\";
             StringBuilder path = new StringBuilder()
-                                        .append("D:\\pcg\\DES\\sou\\SM\\data\\")
+                                        .append(physicalPath)
                                         .append(formatedNow)
                                         .append("/");
 
