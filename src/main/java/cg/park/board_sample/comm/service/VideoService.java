@@ -31,16 +31,11 @@ public class VideoService {
     public Message save(MultipartHttpServletRequest request, String field) {
         try {
 
-            MultipartFile files = request.getFile(field);
-
-            LocalDate now = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-            String formatedNow = now.format(formatter);
-
             String physicalPath = "D:\\pcg\\DES\\sou\\SM\\data\\";
+            String relativePath = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
             StringBuilder path = new StringBuilder()
                                         .append(physicalPath)
-                                        .append(formatedNow)
+                                        .append(relativePath)
                                         .append("/");
 
             File fileDir = new File(path.toString());
@@ -48,12 +43,12 @@ public class VideoService {
                 fileDir.mkdirs();
 
             File saveFile = new File(path.toString(), request.getFile(field).getOriginalFilename());
-            files.transferTo(saveFile);
+            request.getFile(field).transferTo(saveFile);
 
             if (!saveFile.exists())
                 return new Message(false, "파일 생성 실패", null);
 
-            return new Message(true, "OK", new Param(request.getFile(field).getOriginalFilename().toString()));
+            return new Message(true, "OK", new Param(request.getFile(field).getOriginalFilename()));
         }
         catch (Exception e) {
             return new Message(false, "잠시 후 시도해주세요.", null);
