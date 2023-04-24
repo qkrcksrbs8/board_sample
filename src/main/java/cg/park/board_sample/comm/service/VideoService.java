@@ -3,7 +3,6 @@ package cg.park.board_sample.comm.service;
 import cg.park.board_sample.comm.util.Message;
 import cg.park.board_sample.comm.util.Param;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.io.File;
@@ -21,7 +20,7 @@ public class VideoService {
             if (0 > request.getFile(field).getOriginalFilename().lastIndexOf(".mp4"))
                 return new Message(false, ".mp4 확장자만 업로드 가능합니다.", null);
 
-            return new Message(true, "OK", new Param(request.getFile(field).getOriginalFilename().toString()));
+            return new Message(true, "OK", new Param(request.getFile(field).getOriginalFilename()));
         }
         catch (Exception e) {
             return new Message(false, "잠시 후 시도해주세요.", null);
