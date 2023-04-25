@@ -5,10 +5,10 @@ import lombok.Data;
 @Data
 public class Paging {
 
-    private int pageNum;
+    private int pageNum = 0;
     private int blockCount = 5;
     private int blockPage = 3;
     private int startCount;
-    private int endCount;
+    private int endCount = 0;
 
 }
