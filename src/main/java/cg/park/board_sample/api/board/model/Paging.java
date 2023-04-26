@@ -8,7 +8,7 @@ public class Paging {
     private int pageNum = 0;
     private int blockCount = 5;
     private int blockPage = 3;
-    private int startCount;
+    private int startCount = 0;
     private int endCount = 0;
 
 }
