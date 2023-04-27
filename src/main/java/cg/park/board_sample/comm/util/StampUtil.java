@@ -85,9 +85,7 @@ public class StampUtil {
     public static void init() {
         String uri = uri();
 
-//        if (StringUtils.isBlank(uri))
-//            return;
-        if (null == uri || "".equals(uri.trim()))
+        if (isBlank(uri))
             return;
 
         if (isBlock(uri)) {
@@ -99,5 +97,9 @@ public class StampUtil {
             destroy();
             return;
         }
+    }
+
+    public static boolean isBlank(String s) {
+        return null == s || "".equals(s);
     }
 }
