@@ -100,6 +100,6 @@ public class StampUtil {
     }
 
     public static boolean isBlank(String s) {
-        return null == s || "".equals(s);
+        return null == s || "".equals(s.trim());
     }
 }
