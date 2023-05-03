@@ -73,11 +73,9 @@
             title, detail
         }
 
-        let url = '/board/write';
-
-        if ('' != boardNo) {
-            url = '/board/write/'+boardNo;
-        }
+        let url = ('' != boardNo)
+                    ? '/board/write/'+boardNo
+                    : '/board/write';
 
         $.ajax ({
             type : "POST",
