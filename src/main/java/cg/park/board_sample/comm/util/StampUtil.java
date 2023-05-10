@@ -85,6 +85,9 @@ public class StampUtil {
     public static void init() {
         String uri = uri();
 
+        if (uri.contains(".jsp"))
+            return;
+
         if (isBlank(uri))
             return;
 
