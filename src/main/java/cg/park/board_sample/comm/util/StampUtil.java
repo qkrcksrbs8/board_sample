@@ -83,10 +83,7 @@ public class StampUtil {
     }
 
     public static void init() {
-        String uri = uri();
-
-        if (uri.contains(".jsp"))
-            return;
+        String uri = replaceJsp(uri());
 
         if (isBlank(uri))
             return;
@@ -105,4 +102,13 @@ public class StampUtil {
     public static boolean isBlank(String s) {
         return null == s || "".equals(s.trim());
     }
+
+    public static String replaceJsp (String str) {
+        return null == str
+                ? ""
+                : str.replace("WEB-INF/views/pc", "kor")
+                .replace("WEB-INF/views/mo", "kor")
+                .replace(".jsp", "");
+    }
+
 }
