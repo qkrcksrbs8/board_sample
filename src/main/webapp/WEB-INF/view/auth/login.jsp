@@ -71,7 +71,7 @@
                 location.href = '/auth/login';
                 return false;
             }
-            ,error : function(xhr, status, error) {
+            ,error : function() {
                 alert('잠시 후 다시 시도해주세요.');
                 location.href = '/auth/login';
                 return false;
