@@ -103,5 +103,27 @@
 
         return false;
     }
+
+    var repeat;
+    const timeCheck = () => {
+        var time = 180;
+        var placeHolder = "인증번호를 입력해 주세요.";
+        repeat = setInterval(function() {
+            var minutes = Math.floor(time / 60);
+            var second = time % 60;
+            var sSecond = second < 10 ? "0" + second : second;
+
+            var s = " (" + minutes + ":" + sSecond + ")";
+            $("input[name=authNumber]").attr("placeHolder", placeHolder + s);
+
+            if (time === 0) {
+                alert("인증번호 입력 시간이 만료되었습니다. 다시 인증번호를 전송해 주세요.");
+                $("input[name=authNumber]").attr("placeHolder", placeHolder);
+                clearInterval(repeat);
+            }
+
+            time--;
+        }, 1000);
+    }
 </script>
 </html>
