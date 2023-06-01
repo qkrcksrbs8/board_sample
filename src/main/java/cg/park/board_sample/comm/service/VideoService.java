@@ -8,9 +8,12 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 
 @Service
 public class VideoService {
+
+    public static final Logger logger = Logger.getLogger(String.valueOf(VideoService.class));
 
     public Message extensionCheck(MultipartHttpServletRequest request, String field) {
         try {
