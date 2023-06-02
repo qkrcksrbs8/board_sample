@@ -67,4 +67,11 @@ public final class BoardUtil {
     public static String currentType(JoinPoint joinPoint) {
         return joinPoint.getSignature().toShortString();
     }
+
+//    SELECT s.business_number, IFNULL(i.count,0)
+//    FROM stores s
+//    LFET OUTER JOIN (SELECT COUNT(*) count, business_number
+//    FROM interest_store
+//    GROUP BY business_number) i
+//    ON s.business_number = i.business_number
 }
