@@ -26,6 +26,7 @@ public class VideoService {
             return new Message(true, "OK", new Param(request.getFile(field).getOriginalFilename()));
         }
         catch (Exception e) {
+            logger.finest(e.toString());
             return new Message(false, "잠시 후 시도해주세요.", null);
         }
     }
@@ -53,6 +54,7 @@ public class VideoService {
             return new Message(true, "OK", new Param(request.getFile(field).getOriginalFilename()));
         }
         catch (Exception e) {
+            logger.finest(e.toString());
             return new Message(false, "잠시 후 시도해주세요.", null);
         }
     }
