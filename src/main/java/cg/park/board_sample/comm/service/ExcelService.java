@@ -2,7 +2,6 @@ package cg.park.board_sample.comm.service;
 
 import cg.park.board_sample.comm.util.Message;
 import cg.park.board_sample.comm.util.Param;
-import org.apache.tomcat.util.http.fileupload.FileUploadException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
