@@ -1,6 +1,5 @@
 package cg.park.board_sample.comm.controller;
 
-import cg.park.board_sample.comm.service.ExcelService;
 import cg.park.board_sample.comm.service.VideoService;
 import cg.park.board_sample.comm.util.Message;
 import org.springframework.beans.factory.annotation.Autowired;
