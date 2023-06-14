@@ -10,14 +10,12 @@ public class DataSourceConfig {
 
     @Bean
     public DataSource dataSource() {
-        HikariConfig hikariConfig=new HikariConfig();
+        HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
         hikariConfig.setJdbcUrl("jdbc:log4jdbc:mariadb://localhost:3306");
         hikariConfig.setUsername("root");
         hikariConfig.setPassword("1234");
 
-        HikariDataSource dataSource =new HikariDataSource(hikariConfig);
-
-        return dataSource;
+        return new HikariDataSource(hikariConfig);
     }
 }
