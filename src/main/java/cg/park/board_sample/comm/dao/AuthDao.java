@@ -6,5 +6,5 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface AuthDao {
 
-    public Member findByMemberId(String memberId);
+    Member findByMemberId(String memberId);
 }
