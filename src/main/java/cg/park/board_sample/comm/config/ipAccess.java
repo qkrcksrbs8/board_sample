@@ -1,10 +1,7 @@
 package cg.park.board_sample.comm.config;
 
 import org.springframework.stereotype.Component;
-import sun.plugin.dom.exception.InvalidAccessException;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 @Component
 public class ipAccess {
