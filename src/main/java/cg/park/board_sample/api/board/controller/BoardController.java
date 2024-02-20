@@ -6,8 +6,6 @@ import cg.park.board_sample.comm.util.HttpRequestHelper;
 import cg.park.board_sample.comm.util.Message;
 import cg.park.board_sample.comm.util.PagingUtil;
 import cg.park.board_sample.comm.util.ResponseMav;
-import com.sun.rowset.internal.Row;
-import javafx.scene.control.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 @RequestMapping("/board")
 @Controller
