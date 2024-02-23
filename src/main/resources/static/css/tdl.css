@@ -639,3 +639,12 @@ section#content {
 .complete-wrap .feature-box .complete-home-btn:hover, .complete-wrap .feature-box .complete-login-btn:hover {
 	background-color: #333;
 }
+
+/* 버튼 좌,우 정렬 */
+.btn-left {
+	float: inline-start;
+}
+
+.btn-right {
+	float: inline-end;
+}
