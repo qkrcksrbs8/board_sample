@@ -7,6 +7,7 @@ import cg.park.board_sample.comm.util.MemberSession;
 import cg.park.board_sample.comm.util.Message;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
