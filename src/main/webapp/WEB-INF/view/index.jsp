@@ -16,7 +16,7 @@
                 <div class="col-lg-3 col-6 bottommargin fadeInLeft animated">
                     <div class="team">
                         <div class="team-image">
-                            <img src="/images/team/2.jpg" alt="Josh Clark">
+                            <img src="/images/index/main_check.png" alt="main_check">
                         </div>
                         <div class="team-desc team-desc-bg">
                             <div class="team-title"><h4>박찬균</h4><span>Board</span></div>
