@@ -11,7 +11,7 @@
         <div class="section nobg full-screen nopadding nomargin">
             <div class="container-fluid vertical-middle divcenter clearfix">
                 <div class="center">
-                    <a href="/"><img class="login-tdl-logo" src="/css/images/logo.png" alt="TDL Logo"></a>
+                    <a href="/"><img class="login-tdl-logo" src="/images/logo-ruuma.png" alt="TDL Logo"></a>
                 </div>
                 <div class="card divcenter noradius noborder login-form-wrap" style="max-width: 400px;">
                     <div class="card-body" style="padding: 40px;">
@@ -27,6 +27,8 @@
                             </div>
                             <div class="col_full nobottommargin">
                                 <button class="button button-black nomargin" value="login" onclick="login();">로그인</button>
+
+                                <button class="button button-black nomargin btn-right" value="login" onclick="location.href='/auth/logon'; return false;">회원가입</button>
                             </div>
                         </form>
                     </div>
