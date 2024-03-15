@@ -40,6 +40,7 @@ dependencies {
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation group: 'com.github.scribejava', name: 'scribejava-apis', version: '8.3.1'
 }
 
 tasks.named('test') {
