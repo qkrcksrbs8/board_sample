@@ -1,5 +1,4 @@
-package cg.park.board_sample.scribeJava;
-
+package cg.park.board_sample.oauth.global.module;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,12 +7,6 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Properties;
 
-/**
-* 유틸 모듈 클래스
-*
-* @author RWB
-* @since 2021.09.30 Thu 00:27:13
-*/
 public class Util
 {
     /**
@@ -42,9 +35,7 @@ public class Util
      */
     public static String getInfPath()
     {
-        ClassLoader classLoader = Util.class.getClassLoader();
-
-        return new File(Objects.requireNonNull(classLoader.getResource("/")).getPath()).getParent();
+        return Util.class.getResource("/").getPath();
     }
 
     /**
@@ -59,7 +50,6 @@ public class Util
     public static HashMap<String, String> getProperties(String name) throws IOException
     {
         String path = builder(getInfPath(), File.separator, name);
-
         // 파일명 .properties로 끝나지 않을 경우
         if (!name.endsWith(".properties"))
         {
