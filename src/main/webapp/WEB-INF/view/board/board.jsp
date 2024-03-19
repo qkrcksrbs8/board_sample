@@ -8,42 +8,42 @@
 <c:import url="/header"/>
 <style>
     #pop{
-        width: 500px;
-        height: 170px;
+        width: 501px;
+        height: 171px;
         background: #ffffff;
         position: absolute;
-        top:30%;
-        left:35%;
+        top:31%;
+        left:36%;
         border: 1px solid #000000;
         text-align: center;
     }
     #excelUpload{
-        position: absolute; width: 30px; height: 30px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0;
+        position: absolute; width: 31px; height: 31px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0;
     }
-    #fileButton { display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; }
+    #fileButton { display: inline-block; padding: .5em .74em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; }
     #filebox {
-        margin-top: 40px;
-        margin-bottom: 30px;
+        margin-top: 41px;
+        margin-bottom: 31px;
     }
 
 
     #pop2{
-        width: 500px;
-        height: 170px;
+        width: 501px;
+        height: 171px;
         background: #ffffff;
         position: absolute;
-        top:30%;
-        left:35%;
+        top:31%;
+        left:36%;
         border: 1px solid #000000;
         text-align: center;
     }
     #excelUpload2{
-        position: absolute; width: 30px; height: 30px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0;
+        position: absolute; width: 31px; height: 31px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0;
     }
-    #fileButton2 { display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; }
+    #fileButton2 { display: inline-block; padding: .5em .74em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; }
     #filebox2 {
-        margin-top: 40px;
-        margin-bottom: 30px;
+        margin-top: 41px;
+        margin-bottom: 31px;
     }
 </style>
 <body>
