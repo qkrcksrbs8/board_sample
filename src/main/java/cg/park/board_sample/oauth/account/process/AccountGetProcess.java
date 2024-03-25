@@ -1,5 +1,6 @@
 package cg.park.board_sample.oauth.account.process;
 
+import cg.park.board_sample.comm.util.Param;
 import cg.park.board_sample.oauth.account.module.AuthModule;
 import cg.park.board_sample.oauth.global.bean.ResponseBean;
 import cg.park.board_sample.oauth.global.module.Util;
@@ -12,13 +13,11 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.util.UUID;
 import cg.park.board_sample.oauth.global.module.Process;
 import org.springframework.http.ResponseEntity;
-import sun.net.www.protocol.http.HttpURLConnection;
 
 public class AccountGetProcess extends Process
 {
@@ -134,51 +133,34 @@ public class AccountGetProcess extends Process
 //        return response;
 //    }
 
-    public void send(String reqUrl, String code) {
-        String CLIENT_ID = "4f6a3f7fc682f73a86bc75ce8f003791";
-        String REDIRECT_URI = "http://localhost:8080/oauth/callback";
+    public HashMap<String, String> send(String reqUrl, String strParam) {
         //결과값 담을 변수
         String returnStr 	   = "";
-
         HttpsURLConnection con = null;
+        HashMap<String, String> map = new HashMap<>();
 
         try {
-
             URL url = new URL(reqUrl);
-
             StringBuffer buf = new StringBuffer();
-
             con = (HttpsURLConnection)url.openConnection();
 
-            //http method 설정
             con.setRequestMethod("POST");
-
-            //서버통신 timeout 설정 (30초)
-            con.setConnectTimeout(30000);
-
-            //스트림읽기 timeout 설정 (30초)
-            con.setReadTimeout(30000);
+            con.setConnectTimeout(30000);//서버통신 timeout 설정 (30초)
+            con.setReadTimeout(30000);//스트림읽기 timeout 설정 (30초)
 
             //헤더설정
             con.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             con.setRequestProperty("Authorization", "sdfsdfsdfsdf");
 
-            //OutputStream으로 POST 데이터 전달 옵션
-            con.setDoOutput(true);
+            con.setDoOutput(true);//OutputStream으로 POST 데이터 전달 옵션
+            con.connect();//연결
 
-            //연결
-            con.connect();
-
-            // 송신할 데이터 전송.
-            DataOutputStream dos = new DataOutputStream(con.getOutputStream());
-            //        String strParam = "param1=apple&param2=banana&param3=grape";
-            String strParam = "grant_type=authorization_code&client_id="+CLIENT_ID+"&redirect_uri="+REDIRECT_URI+"&code="+code;
+            DataOutputStream dos = new DataOutputStream(con.getOutputStream());// 송신할 데이터 전송.
             dos.writeBytes(strParam);// post body data
             dos.flush();
             dos.close();
 
-            //응답 읽기
-            StringBuilder response = new StringBuilder();
+            StringBuilder response = new StringBuilder(); //응답 읽기
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(con.getInputStream()));
 
             String line;
@@ -191,17 +173,80 @@ public class AccountGetProcess extends Process
             returnStr = returnStr.replaceAll("\\{", "");
             returnStr = returnStr.replaceAll("}", "");
             StringTokenizer t = new StringTokenizer(returnStr, ",");
-            HashMap<String, String> map = new HashMap<>();
             while (t.hasMoreTokens()) {
                 String[] arr = t.nextToken().split(":");
                 map.put(arr[0], arr[1]);
             }
             System.out.println("kakao result: "+returnStr);
             System.out.println("kakao map: "+map);
+
+            return send("https://kapi.kakao.com/v2/user/me?property_keysproperty_keys=kakao_account.profile", new Param("token", map.get("access_token")));
         }
         catch (Exception e) {
             System.out.println("ERROR: "+e);
+            map.put("RESULT_MSG", e.getMessage());
+            map.put("RESULT_CODE", "E001");
+            return map;
         }
+    }
+
+    public HashMap<String, String> send(String reqUrl, Param param) {
+
+        HashMap<String, String> map = new HashMap<>();
+        try {
+            // GET 요청을 보낼 URL
+            URL url = new URL(reqUrl);
+
+            // HttpURLConnection 객체 생성
+            HttpsURLConnection connection = (HttpsURLConnection) url.openConnection();// https
+
+            // 요청 방식 설정 (GET 요청은 기본적으로 설정되어 있음)
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Authorization", "Bearer "+param.get("token"));
+            connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+            // 응답 코드 확인
+            int responseCode = connection.getResponseCode();
+            System.out.println("Response Code: " + responseCode);
+
+            // 응답 내용 읽기
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            StringBuffer response = new StringBuffer();
+            String returnStr 	   = "";
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+
+            returnStr = response.toString();
+            returnStr = returnStr.replaceAll("\"", "");
+            returnStr = returnStr.replaceAll("\\{", "");
+            returnStr = returnStr.replaceAll("}", "");
+            StringTokenizer t = new StringTokenizer(returnStr, ",");
+            while (t.hasMoreTokens()) {
+                String[] arr = t.nextToken().split(":");
+                map.put(arr[0], arr[1]);
+            }
+
+
+
+            // 응답 내용 출력
+            System.out.println("kakao /user/me returnStr: "+returnStr);
+            System.out.println("kakao /user/me map: "+map);
+            String nickname = returnStr.substring(returnStr.indexOf("nickname"), returnStr.indexOf("nickname")+returnStr.substring(returnStr.indexOf("nickname")).indexOf(","));
+            System.out.println("nickname: "+nickname);
+
+            // 연결 종료
+            connection.disconnect();
+            map.put("nickname", nickname.replace("nickname:", ""));
+        } catch (Exception e) {
+            map.put("nickname: ", "");
+            e.printStackTrace();
+        }
+        return map;
     }
 
 }
