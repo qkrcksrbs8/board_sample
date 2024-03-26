@@ -26,8 +26,6 @@ public class ControllerLogAop {
         String param = BoardUtil.mapToStr(request.getParameterMap());
         String uri = request.getMethod() + "["+request.getRequestURI()+"]";
 
-        StampUtil.init();
-
         logger.info("SSID = {}, ===================START===================", BoardUtil.requestedSessionId());
         logger.info("SSID = {}, @Before : {}, {}, param : {}", BoardUtil.requestedSessionId(), BoardUtil.currentType(joinPoint), uri, param);
     }
