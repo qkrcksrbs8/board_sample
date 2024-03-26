@@ -2,7 +2,6 @@ package cg.park.board_sample.comm.aop;
 
 import cg.park.board_sample.comm.util.BoardUtil;
 import cg.park.board_sample.comm.util.HttpRequestHelper;
-import cg.park.board_sample.comm.util.StampUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
