@@ -12,7 +12,7 @@ public class Param extends HashMap {
     public Param (Object obj) {
         super.put("data", obj);
     }
-    Param (String key, String value) {
+    public Param (String key, String value) {
         super.put(key, value);
     }
     public Param set(String key, String value) {
