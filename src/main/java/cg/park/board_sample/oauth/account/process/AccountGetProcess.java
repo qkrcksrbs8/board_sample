@@ -222,6 +222,7 @@ public class AccountGetProcess extends Process
 
 
             returnStr = response.toString();
+            System.out.println("kakao /user/me returnStr: "+returnStr);
             returnStr = returnStr.replaceAll("\"", "");
             returnStr = returnStr.replaceAll("\\{", "");
             returnStr = returnStr.replaceAll("}", "");
