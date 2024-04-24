@@ -30,6 +30,11 @@
 
                                 <button class="button button-black nomargin btn-right" value="login" onclick="location.href='/auth/logon'; return false;">회원가입</button>
                             </div>
+                            <br>
+                            <div class="col_full nobottommargin">
+                                <img style="cursor : pointer;" src="/images/oauth/kakao_login_medium.png" alt="kakao login" onclick="snsLogin('kakao');">
+                                <img style="cursor : pointer;width: 33%;height: 44px;" src="/images/oauth/naver_login_medium.png" alt="naver login" onclick="snsLogin('naver');">
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -46,6 +51,11 @@
 </body>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script>
+
+    function completeLogin() {
+        location.href='/';
+    }
+
     const login = () => {
         let memberId = $('#memberId').val();
         let password = $('#password').val();
@@ -81,5 +91,28 @@
         });
 
     }
+
+    const snsLogin = (platform) => {
+        $.ajax ({
+            type  : 'GET',
+            url : '/oauth/login/'+platform ,
+            dataType : 'json',
+            success : function(data) {
+                window.open(data.body, 'KakaoLogin', 'titlebar=1, resizable=1, scrollbars=yes, width=600, height=700');
+            }
+            ,fail : function(data) {
+                alert(data.message);
+                location.href = '/auth/login';
+                return false;
+            }
+            ,error : function() {
+                alert('잠시 후 다시 시도해주세요.');
+                location.href = '/auth/login';
+                return false;
+            }
+        });
+
+    }
+
 </script>
 </html>
