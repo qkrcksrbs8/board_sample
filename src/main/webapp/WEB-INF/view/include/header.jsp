@@ -16,6 +16,7 @@
             <nav id="primary-menu" class="with-arrows clearfix style-5">
                 <ul>
                     <li><a href="/board"><div><i class="icon-clipboard-list"></i>자유게시판</div></a></li>
+                    <li><a href="/practice"><div><i class="icon-chalkboard-teacher"></i>큐평</div></a></li>
                 </ul>
                 <ul>
                     <c:if test="${empty member.memberId}">
@@ -23,6 +24,7 @@
                         <li><a href="/auth/logon"><div><i class="icon-line-circle-plus"></i>회원가입</div></a></li>
                     </c:if>
                     <c:if test="${not empty member.memberId}">
+                        <li><a href="/" ><div><i class="icon-user-alt"></i> <c:out value="${member.memberId}"/> </div></a></li>
                         <li><a href="/" onclick="logout();"><div><i class="icon-power-off"></i>로그아웃</div></a></li>
                     </c:if>
                 </ul>
